@@ -63,54 +63,72 @@ features = x_train.shape[1]
 print(samples, features)
 
 #########  choose the best learning rate for Adam ########
-a_list = [0.001, 0.01, 0.1, 1.0]
-for a in a_list:
+#a_list = [0.001, 0.01, 0.1, 1.0]
+#for a in a_list:
+#    model = Sequential([
+#   	    tf.keras.Input(shape=(features,)), 
+#	    Dense(units=512, activation="relu", name="L1"),
+#	    Dense(units=256, activation="relu", name="L2"),
+#	    Dense(units=4, name="L6"),
+#        ])
+#    print("learning rate = ",a)
+#    model.compile(optimizer=Adam(learning_rate=a), loss='mean_squared_error')
+#    history = model.fit(
+#   	    x_train, y_train,
+#   	    validation_data = (x_cv, y_cv),
+#   	    epochs=500
+#        )
+#    label_1 = 'Training Loss '+str(a)
+#    label_2 = 'Validation Loss '+str(a)
+#    plt.plot(history.history['loss'], label = label_1)
+#    plt.plot(history.history['val_loss'], label = label_2)
+
+#plt.legend()
+#plt.xlabel('Epoch')
+#plt.ylabel('Loss')
+#plt.show()
+
+######## after running the above run for best learning rate #######
+train_loss = []
+cv_loss = []
+test_loss = []
+lamda_list = [0.0, 0.001, 0.01, 0.1, 1.0, 2.0]
+#a_list = [0.001, 0.01, 0.1, 1.0]
+
+for lmd in lamda_list:
+    print("lamda = ",lmd)
     model = Sequential([
-   	    tf.keras.Input(shape=(features,)), 
-	    Dense(units=512, activation="relu", name="L1"),
-	    Dense(units=256, activation="relu", name="L2"),
-	    Dense(units=4, name="L6"),
+        tf.keras.Input(shape=(features,)),
+        Dense(units=512, activation="relu", kernel_regularizer=tf.keras.regularizers.l2(lmd), name="L1"),
+        Dense(units=256, activation="relu", kernel_regularizer=tf.keras.regularizers.l2(lmd), name="L2"),
+        Dense(units=4, kernel_regularizer=tf.keras.regularizers.l2(lmd), name="L3"),
         ])
-    print("learning rate = ",a)
-    model.compile(optimizer=Adam(learning_rate=a), loss='mean_squared_error')
+    model.compile(optimizer=Adam(learning_rate=0.001), loss='mean_squared_error')
     history = model.fit(
-   	    x_train, y_train,
-   	    validation_data = (x_cv, y_cv),
-   	    epochs=500
+   		x_train, y_train,
+   		validation_data = (x_cv, y_cv),
+   		epochs=500
         )
-    label_1 = 'Training Loss '+str(a)
-    label_2 = 'Validation Loss '+str(a)
+    ########## calculate train and test error ######## 
+    train_loss.append(model.evaluate(x_train, y_train, verbose=0))
+    cv_loss.append(model.evaluate(x_cv, y_cv, verbose=0))
+    test_loss.append(model.evaluate(x_test, y_test, verbose=0))
+    label_1 = 'Training Loss '+str(lmd)
+    label_2 = 'Validation Loss '+str(lmd)
     plt.plot(history.history['loss'], label = label_1)
     plt.plot(history.history['val_loss'], label = label_2)
 
 plt.legend()
-plt.xlabel('Epoch')
-plt.ylabel('Loss')
+plt.grid(True)
 plt.show()
 
-######## after running the above run for best learning rate #######
-#train_loss = []
-#cv_loss = []
-#test_loss = []
-#lamda = []
-#for i in range(101):
-#	lmd = i*0.001
-#	model = Sequential([
-#    tf.keras.Input(shape=(features,)), 
-#	Dense(units=64, activation="relu", kernel_regularizer=tf.keras.regularizers.l2(lmd), name="L1"),
-#	Dense(units=32, activation="relu", kernel_regularizer=tf.keras.regularizers.l2(lmd), name="L2"),
-#	Dense(units=4, kernel_regularizer=tf.keras.regularizers.l2(lmd), name="L3"),
-#			])
-#	model.compile(optimizer=Adam(learning_rate=0.001), loss='mean_squared_error')
-#	history = model.fit(
-#   		x_train, y_train,
-#   		validation_data = (x_cv, y_cv),
-#   		epochs=500
-#	)
-#	########## calculate train and test error ########
-#	train_loss.append(model.evaluate(x_train, y_train, verbose=0))
-#	cv_loss.append(model.evaluate(x_cv, y_cv, verbose=0))
-#	test_loss.append(model.evaluate(x_test, y_test, verbose=0))
-#	lamda.append(lmd)
-
-# print(f"training err {train_loss:0.2f}, cv err {cv_loss:0.2f}, test err {test_loss:0.2f}")
+plt.plot(lamda_list, train_loss, label="Training Loss")
+plt.plot(lamda_list, cv_loss, label="Validation Loss")
+plt.plot(lamda_list, test_loss, label="Test Loss")
+plt.xlabel('lamda')
+plt.ylabel('Loss')
+plt.title('Training, Validation and Test Loss over lamda')
+plt.legend()
+plt.grid(True)
+plt.show()
+#print(f"training err {train_loss:0.2f}, cv err {cv_loss:0.2f}, test err {test_loss:0.2f}")
