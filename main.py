@@ -1,4 +1,3 @@
-# Import libraries
 import numpy as np
 import tensorflow as tf
 import matplotlib.pyplot as plt
@@ -6,6 +5,8 @@ from tensorflow.keras import Sequential
 from tensorflow.keras.layers import Dense
 from tensorflow.keras.activations import relu
 from tensorflow.keras.optimizers import Adam
+from tensorflow.keras.layers import Lambda
+from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
 
 #########  load data ###########################
@@ -18,7 +19,7 @@ x_t = x_t.reshape(n_sample,-1)  ### n_sample synthetic curves
 print(x_t.shape)
 y_t = spots_par[:,1:5]  #### 4 spots parameters as target values
 print(y_t.shape)
-###########################################################
+
 for i in range(n_sample):
     m_x_t = np.mean(x_t[i,:])
     std_x_t = np.std(x_t[i,:])
@@ -29,7 +30,7 @@ for i in range(n_sample):
 scale_par_1 = [] # scale parameter 1 (mean or max_val)
 scale_par_2 = [] # scale parameter 2 (std or min_val)
 for j in range(4):
-    if j <= 1:
+    if j <= 2:
         max_val = np.max(y_t[:,j])
         min_val = np.min(y_t[:,j])
         scale_par_1.append(max_val)
@@ -42,93 +43,59 @@ for j in range(4):
         scale_par_2.append(std_val)
         y_t[:,j] = (y_t[:,j]-scale_par_1[j])/scale_par_2[j]
 
-#y_t = (y_t - min_val) / (max_val - min_val)
-#y_t = (y_t - m_y_t) / std_y_t
+np.save('scale_par_1.npy', scale_par_1)
+np.save('scale_par_2.npy', scale_par_2)
 
-
-
-########## scale train and target data ########################
-#scaler = StandardScaler()
-#x_t = scaler.fit_transform(x_t)
-#y_t = scaler.fit_transform(y_t)
-########## Create train, cross validate and test data ################
 x_train, x_, y_train, y_ = train_test_split(x_t,y_t,test_size=0.40, random_state=1)
 x_cv, x_test, y_cv, y_test = train_test_split(x_,y_,test_size=0.50, random_state=1)
 print("x_train.shape", x_train.shape, "y_train.shape", y_train.shape)
 print("x_cv.shape", x_cv.shape, "y_cv.shape", y_cv.shape)
 print("x_test.shape", x_test.shape, "y_test.shape", y_test.shape)
-################################################
+
 samples = x_train.shape[0]
 features = x_train.shape[1]
 print(samples, features)
+#########################################################
+class TestLossCallback(tf.keras.callbacks.Callback):
+    def __init__(self, test_x, test_y):
+        self.x = test_x
+        self.y = test_y
+        self.test_losses = []
+        
+    def on_epoch_end(self, epoch, logs=None):
+        # Evaluate on the test data
+        test_loss = self.model.evaluate(self.x, self.y, verbose=0)
+        self.test_losses.append(test_loss)
 
-#########  choose the best learning rate for Adam ########
-#a_list = [0.001, 0.01, 0.1, 1.0]
-#for a in a_list:
-#    model = Sequential([
-#   	    tf.keras.Input(shape=(features,)), 
-#	    Dense(units=512, activation="relu", name="L1"),
-#	    Dense(units=256, activation="relu", name="L2"),
-#	    Dense(units=4, name="L6"),
-#        ])
-#    print("learning rate = ",a)
-#    model.compile(optimizer=Adam(learning_rate=a), loss='mean_squared_error')
-#    history = model.fit(
-#   	    x_train, y_train,
-#   	    validation_data = (x_cv, y_cv),
-#   	    epochs=500
-#        )
-#    label_1 = 'Training Loss '+str(a)
-#    label_2 = 'Validation Loss '+str(a)
-#    plt.plot(history.history['loss'], label = label_1)
-#    plt.plot(history.history['val_loss'], label = label_2)
+test_loss_callback = TestLossCallback(x_test, y_test)
+#########################################################
+model = Sequential([
+   	tf.keras.Input(shape=(features,)), 
+#    Lambda(add_noise),  # Add noise here
+	Dense(units=2**8, activation="relu", name="L1"),
+    Dense(units=2**7, activation="relu", name="L2"),
+	Dense(units=2**6, activation="relu", name="L3"),
+	Dense(units=4, activation="sigmoid", name="L4"),
+])
 
-#plt.legend()
-#plt.xlabel('Epoch')
-#plt.ylabel('Loss')
-#plt.show()
+model.compile(optimizer=Adam(learning_rate=0.001), loss='mean_squared_error')
+history = model.fit(
+   	x_train, y_train,
+   	validation_data = (x_cv, y_cv),
+   	epochs=500,
+    callbacks=[test_loss_callback]
+)
 
-######## after running the above run for best learning rate #######
-train_loss = []
-cv_loss = []
-test_loss = []
-lamda_list = [0.0, 0.001, 0.01, 0.1, 1.0, 2.0]
-#a_list = [0.001, 0.01, 0.1, 1.0]
+test_losses = test_loss_callback.test_losses
 
-for lmd in lamda_list:
-    print("lamda = ",lmd)
-    model = Sequential([
-        tf.keras.Input(shape=(features,)),
-        Dense(units=512, activation="relu", kernel_regularizer=tf.keras.regularizers.l2(lmd), name="L1"),
-        Dense(units=256, activation="relu", kernel_regularizer=tf.keras.regularizers.l2(lmd), name="L2"),
-        Dense(units=4, kernel_regularizer=tf.keras.regularizers.l2(lmd), name="L3"),
-        ])
-    model.compile(optimizer=Adam(learning_rate=0.001), loss='mean_squared_error')
-    history = model.fit(
-   		x_train, y_train,
-   		validation_data = (x_cv, y_cv),
-   		epochs=500
-        )
-    ########## calculate train and test error ######## 
-    train_loss.append(model.evaluate(x_train, y_train, verbose=0))
-    cv_loss.append(model.evaluate(x_cv, y_cv, verbose=0))
-    test_loss.append(model.evaluate(x_test, y_test, verbose=0))
-    label_1 = 'Training Loss '+str(lmd)
-    label_2 = 'Validation Loss '+str(lmd)
-    plt.plot(history.history['loss'], label = label_1)
-    plt.plot(history.history['val_loss'], label = label_2)
-
-plt.legend()
-plt.grid(True)
-plt.show()
-
-plt.plot(lamda_list, train_loss, label="Training Loss")
-plt.plot(lamda_list, cv_loss, label="Validation Loss")
-plt.plot(lamda_list, test_loss, label="Test Loss")
-plt.xlabel('lamda')
+plt.plot(history.history['loss'], label='Training Loss')
+plt.plot(history.history['val_loss'], label='Validation Loss')
+plt.plot(test_losses, label='Test Loss')
+plt.xlabel('Epoch')
 plt.ylabel('Loss')
-plt.title('Training, Validation and Test Loss over lamda')
+plt.title('Training and Validation Loss over Epochs')
 plt.legend()
 plt.grid(True)
 plt.show()
-#print(f"training err {train_loss:0.2f}, cv err {cv_loss:0.2f}, test err {test_loss:0.2f}")
+
+model.save('nn.keras')
