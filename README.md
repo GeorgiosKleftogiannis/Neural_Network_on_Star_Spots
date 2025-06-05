@@ -5,7 +5,7 @@ This project implements a neural network to predict the values of star spot para
 Since real data doesn't include ground truth for star spots parameters, I generated synthetic data using [PHOEBE](https://phoebe-project.org/)(PHysics Of Eclipsing BinariEs). I used Monte-Carlo sampling to generate 10,000 light curves for a specific eclipsing binary system, stadarized them to 201 phase points.
 
 
-## 1. Packages
+## 2. Packages
 
 The packages used for this project are
 - Tensorflow and Keras
@@ -25,8 +25,8 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
 ```
 
-## 2. Load and Preprocess Data
-### 2.1 Load Data
+## 3. Load and Preprocess Data
+### 3.1 Load Data
 Load light curve data (synthetic_lc.dat) and corresponding spot parameters (spot_par.dat).
 - x_t contains the light curve magnitudes.
 - y_t contains 4 target spot parameters.
@@ -41,7 +41,7 @@ Reshape and normalize the light curves:
 x_t = synthetic_lc[:,2]
 x_t = x_t.reshape(n_sample, -1)
 ```
-### 2.2 Preprocess Data
+### 3.2 Preprocess Data
 Normalize each sample features values, using Z-score normalization (mean and standard deviation).
 Different scaling methods are used for target parameters:
 - For the first 3 parameters: Min-Max scaling
@@ -56,7 +56,7 @@ np.save('scale_par_1.npy', scale_par_1)
 np.save('scale_par_2.npy', scale_par_2)
 ```
 
-### 2.3 Split Data
+### 3.3 Split Data
 Split the dataset into:
 - Training set
 - Cross-validation set
@@ -67,7 +67,7 @@ x_train, x_, y_train, y_ = train_test_split(x_t, y_t, test_size=0.40, random_sta
 x_cv, x_test, y_cv, y_test = train_test_split(x_, y_, test_size=0.50, random_state=1)
 ```
 
-## 3. Define Neural Network Model
+## 4. Define Neural Network Model
 A simple feedforward network with 4 hidden layers:
 - 3 ReLU hidden layers (256, 128 and 64 units)
 - 1 output layer with 4 units and a sigmoid activation
