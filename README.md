@@ -2,7 +2,7 @@
 This project implements a neural network to predict the values of star spot parameters of an eclipsing binary star.
 
 ## 1. Synthetic data
-Since real data doesn't include ground truth for star spots parameters, I generated synthetic data using [PHOEBE](https://phoebe-project.org/)(PHysics Of Eclipsing BinariEs). I used Monte-Carlo sampling to generate 10,000 light curves for a specific eclipsing binary system, stadarized them to 201 phase points.
+Since real data doesn't include ground truth for star spots parameters, I generated synthetic data using [PHOEBE](https://phoebe-project.org/)(PHysics Of Eclipsing BinariEs). I used Monte-Carlo sampling to generate 10,000 light curves for a specific eclipsing binary system, stadarized them to 201 equaly spaced phase points.
 
 
 ## 2. Packages
@@ -23,6 +23,8 @@ from tensorflow.keras.activations import relu
 from tensorflow.keras.optimizers import Adam
 from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
+from scipy.interpolate import PchipInterpolator
+from scipy.interpolate import Akima1DInterpolator
 ```
 
 ## 3. Load and Preprocess Data
@@ -107,13 +109,22 @@ Define a custom Keras callback to evaluate the test loss at the end of each epoc
 class TestLossCallback(tf.keras.callbacks.Callback):
     ...
 ```
+## 5. Model validation
 Visualize training, validation, and test loss:
 ```python
 plt.plot(history.history['loss'], label='Training Loss')
 plt.plot(history.history['val_loss'], label='Validation Loss')
 plt.plot(test_losses, label='Test Loss')
 ```
-Finally, save the trained model in .keras format:
-```Python
-model.save('nn.keras')
-```
+
+## 6. Inference
+Finally, I apply the trained model to the observational light curve of the target system to infer the optimized star spot parameters.
+
+The implementation is not entirely straightforward and requires some additional data processing. As mentioned earlier, each synthetic light curve consists of 201 equally spaced phase points. However, the observational data do not follow a fixed, evenly spaced grid. Therefore, I interpolate the observational light curve to match the same resolution before feeding it into the model.
+
+Further, the observational data are not in phase, so phase folding is implemented using the system's known period and epoch.
+
+Finally, I scaled the observational data before feed them to the model.
+
+
+Picture a shows the interpolation of observational data
