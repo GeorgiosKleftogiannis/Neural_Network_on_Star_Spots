@@ -2,9 +2,7 @@
 This project implements a neural network to predict the values of star spot parameters of an eclipsing binary star.
 
 ## 1. Synthetic data
-Since real data doesn't include ground truth for star spots parameters, I generated synthetic data using [PHOEBE](https://phoebe-project.org/)(PHysics Of Eclipsing BinariEs).
-
-I used Monte-Carlo sampling to generate 10,000 light curves for a specific eclipsing binary system, stadarized them to fixed phase points.
+Since real data doesn't include ground truth for star spots parameters, I generated synthetic data using [PHOEBE](https://phoebe-project.org/)(PHysics Of Eclipsing BinariEs). I used Monte-Carlo sampling to generate 10,000 light curves for a specific eclipsing binary system, stadarized them to 201 phase points.
 
 
 ## 1. Packages
