@@ -1,5 +1,5 @@
 ## Overview
-This project implements a neural network to predict the values of the star spot parameters of an eclipsing binary star.
+This project implements a neural network to predict the values of star spot parameters of an eclipsing binary star.
 
 ## 1. Synthetic data
 Since real data doesn't include ground truth for star spots parameters, I generated synthetic data using [PHOEBE](https://phoebe-project.org/)(PHysics Of Eclipsing BinariEs).
