@@ -1,6 +1,11 @@
-# Neural Network Training on Synthetic Light Curve Data
+## Overview
+This project implements a neural network to predict the values of the star spot parameters of an eclipsing binary star.
 
-This notebook trains a neural network model to predict spot parameters from synthetic light curve data using TensorFlow and Keras.
+## 1. Synthetic data
+Since real data doesn't include ground truth for star spots parameters, I generated synthetic data using [PHOEBE](https://phoebe-project.org/)(PHysics Of Eclipsing BinariEs).
+
+I used Monte-Carlo sampling to generate 10,000 light curves for a specific eclipsing binary system, stadarized them to fixed phase points.
+
 
 ## 1. Packages
 
