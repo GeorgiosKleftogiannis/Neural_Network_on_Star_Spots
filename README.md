@@ -71,6 +71,15 @@ x_cv, x_test, y_cv, y_test = train_test_split(x_, y_, test_size=0.50, random_sta
 A simple feedforward network with 4 hidden layers:
 - 3 ReLU hidden layers (256, 128 and 64 units)
 - 1 output layer with 4 units and a sigmoid activation
+
+| Layer (type) | Output Shape     | Activation | Parameters |
+|--------------|------------------|------------|------------|
+| Input        | (None, features) | —          | 0          |
+| Dense        | (None, 256)      | ReLU       | —          |
+| Dense        | (None, 128)      | ReLU       | —          |
+| Dense        | (None, 64)       | ReLU       | —          |
+| Dense        | (None, 4)        | Sigmoid    | —          |
+
 ```Python
 model = Sequential([
     tf.keras.Input(shape=(features,)),
