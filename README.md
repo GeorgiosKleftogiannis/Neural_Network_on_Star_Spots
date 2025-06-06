@@ -3,7 +3,7 @@ This project implements a neural network to predict the values of star spot para
 
 ## Outline
 - [1-Packages](#1-packages)
-- [2-Load and Preprocess Data](#2-data-preprocessing)
+- [2-Load and Preprocess Data](#2)
   - [2.1 Synthetic data](#4.1)
   - [2.2 Load Data](#4.1)
   - [2.3 Preprocess Data]
