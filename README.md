@@ -4,14 +4,14 @@ This project implements a neural network to predict the values of star spot para
 ## Outline
 - [1-Packages](#1-packages)
 - [2-Load and Preprocess Data](#2-load-and-preprocess-data)
-  - [2.1 Synthetic data](#2.1-synthetic data)
-  - [2.2 Load Data](#2.2-load data)
-  - [2.3 Preprocess Data]
-  - [2.4 Split Data]
-- [3-Define Neural Network Model](#3-softmax-function)
-- [4-Model Validation](#4)
-- [5-Predictions](#4)
-- [6-Results evaluation]()
+  - [2.1 Synthetic data](#2.1-synthetic-data)
+  - [2.2 Load Data](#2.2-load-data)
+  - [2.3 Preprocess Data](#2.3-preprocess-data)
+  - [2.4 Split Data](#2.4-split-data)
+- [3-Define Neural Network Model](#3-define-neural-network-model)
+- [4-Model Validation](#4-model-validation)
+- [5-Predictions](#5-predictions)
+- [6-Results evaluation](6-results-evaluation)
 
 
 ## 1. Packages
