@@ -1,6 +1,8 @@
 
 ## Outline
 - [1-Overview](#1-overview)
+  - [1.1-Maxima Asymmetry](#1.1-maxima-asymmetry)
+  - [1.2-Project Goal](#1.1-project-goal)
 - [2-Packages](#2-packages)
 - [3-Load and Preprocess Data](#3-load-and-preprocess-data)
   - [3.1 Synthetic data](#3.1-synthetic-data)
@@ -14,10 +16,13 @@
 - [8-What's next](#8-whats-next)
 
 ## 1. Overview
-This project implements a neural network to predict the values of star spot parameters of an eclipsing binary star system (EB system).
-An EB system consists of two stars in a very small distance, orbiting around their common center of mass. The phenomenon is periodical and under certain circumstances the two star can eclipse one the other causing a decrease of light observed in time.
-Consequently the light curve of EB's can be devided in four different parts. Two parts that the observed light is maximum (both stars visible) and two parts that observed light is minimum (eclipses). 
-In general the two maxima of light observed in the curves should be equal. Whenever this is not the case, a maxima asymmetry (MA) is present. The following image shows two light curves, one with MA (blue) and one without MA (yellow).
+### 1.1 Maxima Asymmetry
+An EB system consists of two stars orbiting around their common center of mass at a close distance. The phenomenon is periodic, and if the observer's line of sight is closely aligned with the orbital plane of the system (i.e., they form a small angle), one star can eclipse the other, causing a measurable decrease in observed brightness over time. This creates a characteristic light curve, which can be divided into four distinct phases:
+
+-Two maxima: when both stars are visible.
+-Two minima: when one star eclipses the other.
+
+In an ideal EB system, the two light maxima are equal. However, in some cases, an asymmetry between the maxima—known as Maxima Asymmetry (MA) or O' Connell effect—is observed. The image below illustrates this, comparing a light curve with MA (blue) and one without MA (yellow).
 
 ![MA image](images/with_without_ma.png)
 
@@ -34,7 +39,10 @@ Many physical mechanisms can cause a MA. One of them is the presence of spot/s, 
 <!--| ![](images/observed_interpolated.png) | ![](images/observed_interpolated.png) |
 |----------------|----------------|-->
 
-The purpose of the present is to implement a neural network (NN) to search for a set of spot parameters values that could account for the MA observed in the EB system at hand. The key idea is to train the NN with a set of synthetic data to learn the inverse problem. The model infered is used to compute the four star spot parameters from the shape of the light curve.
+## 1.2 Project Goal
+
+The goal of this project is to develop a neural network (NN) capable of estimating the star spot parameters that could explain the observed MA in a given EB system. The key idea is to train the NN on synthetic light curve data to learn the inverse problem—inferring physical spot characteristics from the shape of the curve.
+
 
 
 ## 2. Packages
