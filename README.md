@@ -2,7 +2,7 @@
 ## Outline
 - [1-Overview](#1-overview)
   - [1.1-Maxima Asymmetry](#1.1-maxima-asymmetry)
-  - [1.2-Project Goal](#1.1-project-goal)
+  - [1.2-Project Goal](#1.2-project-goal)
 - [2-Packages](#2-packages)
 - [3-Load and Preprocess Data](#3-load-and-preprocess-data)
   - [3.1 Synthetic data](#3.1-synthetic-data)
