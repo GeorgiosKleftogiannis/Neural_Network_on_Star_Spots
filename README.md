@@ -39,7 +39,7 @@ Many physical mechanisms can cause a MA. One of them is the presence of spot/s, 
 <!--| ![](images/observed_interpolated.png) | ![](images/observed_interpolated.png) |
 |----------------|----------------|-->
 
-## 1.2 Project Goal
+### 1.2 Project Goal
 
 The goal of this project is to develop a neural network (NN) capable of estimating the star spot parameters that could explain the observed MA in a given EB system. The key idea is to train the NN on synthetic light curve data to learn the inverse problem—inferring physical spot characteristics from the shape of the curve.
 
