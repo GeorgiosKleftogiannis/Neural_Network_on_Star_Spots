@@ -172,7 +172,8 @@ plt.plot(history.history['loss'], label='Training Loss')
 plt.plot(history.history['val_loss'], label='Validation Loss')
 plt.plot(test_losses, label='Test Loss')
 ```
-The following image shows the loss and the accuracy of the NN model. It can be seen that although the model is slightly overfiting (validation loss>training loss) the test loss is at thte same amount the training loss which means that the model generalizes well. This is supported by the accuracy vs epoch diagramm which shows that training, validation and test accuracy have aproximatly the same value (0.75[^1]).
+The following image shows the loss and the accuracy of the NN during training. Although the model exhibits slight overfitting (as indicated by the validation loss being higher than the training loss), the test loss remains close to the training loss, suggesting that the model generalizes well to unseen data.
+This is further supported by the accuracy vs. epoch plot, where the training, validation, and test accuracies converge around 0.750, indicating consistent performance across all three datasets. (0.75[^1]).
 ![Training, validation and test loss and accuracy](images/loss_accuracy.png)
 
 [^1]: The value of 0.75 accuracy may seem relatively low but given the complexity and the hight correlation between the physical parameters of the EB systems and star spot parameters is considered acceptable.
