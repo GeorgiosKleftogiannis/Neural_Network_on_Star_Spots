@@ -1,8 +1,10 @@
 ## Overview
 This project implements a neural network to predict the values of star spot parameters of an eclipsing binary star system (EB system).
 An EB system consists of two stars in a very small distance, orbiting around their common center of mass. The phenomenon is periodical and under certain circumstances the two star can eclipse one the other causing a decrease of light observed in time.
-Consequently the light curve of EB's can be devided in four different parts. Two parts that we observe the maximum light (both stars visible) and two parts that we observe minimum light (eclipses). 
-I general the two maximum of light observed in the curves should be equal. Whenever this is not the case, a maxima asymmetry (MA) is present.
+Consequently the light curve of EB's can be devided in four different parts. Two parts that the observed light is maximum (both stars visible) and two parts that observed light is minimum (eclipses). 
+I general the two maxima of light observed in the curves should be equal. Whenever this is not the case, a maxima asymmetry (MA) is present. The following image shows two light curves, one with MA (blue) and one without MA (yellow)
+
+![MA image](images/with_without_ma.png)
 
 Many physical mechanisms can cause a MA. One of them is the presence of spot/s, which is an area on the star's surface that has different temperature (emmites different amount of light). There are four parameters that govern the spot.
 1. Longitude (degrees)
@@ -17,7 +19,7 @@ Many physical mechanisms can cause a MA. One of them is the presence of spot/s, 
 <!--| ![](images/observed_interpolated.png) | ![](images/observed_interpolated.png) |
 |----------------|----------------|-->
 
-![MA image](images/with_without_ma.png)
+
 
 The purpose of the present is to implement a neural network to search for a set of spot parameters values that could account for the MA observed in the EB system at hand. 
 
@@ -180,6 +182,6 @@ As it can be seen in the above image the model with the spot ($χ^2 = 1.490$) is
 To inprove my model I could do one of the following:
 1. Increase number of synthetic data to improve both training and validation accuracy.
 2. Increase the number of epochs and examine the effect that it has on the model.
-3. Create a more complete NN model to include synthetic and observation data for the other 3 filters.
+3. Create a more complete NN model to include synthetic and observation data for the other 3 filters (V, R and I).
 4. Try a different approch on the system's physical model by removing the star spot from the hotter star and put it on colder star of the system.
 5. Try different values for physical parameters of the system that are ambiguous.
