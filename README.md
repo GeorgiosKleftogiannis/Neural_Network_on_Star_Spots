@@ -129,8 +129,7 @@ plt.plot(history.history['loss'], label='Training Loss')
 plt.plot(history.history['val_loss'], label='Validation Loss')
 plt.plot(test_losses, label='Test Loss')
 ```
-![Alt text](images/observed_interpolated.png)
-
+![Training, validation and test loss and accuracy](images/loss_accuracy.png)
 
 ## 5. Predictions
 Finally, I apply the trained model to the observational light curve of the target system to infer the optimized star spot parameters.
@@ -143,6 +142,7 @@ Finally, I scaled the observational data before feed them to the model.
 
 
 Picture a shows the interpolation of observational data
+![Observed and interpolated data in phase](images/observed_interpolated.png)
 
 ## 6. Results evaluation
 
