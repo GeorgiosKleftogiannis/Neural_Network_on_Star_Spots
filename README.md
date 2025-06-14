@@ -166,13 +166,14 @@ Picture a shows the interpolation of observational data
 ![Observed and interpolated data in phase](images/observed_interpolated.png)
 
 ## 6. Results evaluation
-To evaluate the predictions made by the the NN for the four star spots parameters I update, in PHOEBE, the physical model of the system to include a star spot on the surface of the . This has two effects:
+To evaluate the predictions made by the the NN for the four star spots parameters I update, in [PHOEBE](https://phoebe-project.org/releases/legacy/), the physical model of the system to include a star spot on the surface of the . This has two effects:
 
 1. a small decrease of the $χ^2$ value,
 2. a the model still cannot represent correctly the first maximum of light.
 The first effect shows that the trained model not only can infere physeable results but it also increase the accuracy of the fitted model. While, the second one shows that there still room for improvment.
 
 ![spotted and unspotted observed and synthetic lightcurves](images/model_eval.png)
+
 As it can be seen in the above image the model with the spot ($χ^2 = 1.490$) is slightly better than the model without the spot ($χ^2 = 1.557$)
 
 ## 7. What's next
