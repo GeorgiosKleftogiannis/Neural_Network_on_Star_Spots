@@ -5,9 +5,9 @@ Consequently the light curve of EB's can be devided in four different parts. Two
 I general the two maximum of light observed in the curves should be equal. Whenever this is not the case, a maxima asymmetry (MA) is present.
 
 Many physical mechanisms can cause a MA. One of them is the presence of spot/s, which is an area on the star's surface that has different temperature (emmites different amount of light). There are four parameters that govern the spot.
-1. Longitude
-2. Latitude
-3. Size
+1. Longitude (degrees)
+2. Latitude (degrees)
+3. Size (degrees)
 4. Temperature ratio
 
 | ![](images/observed_interpolated.png) | ![](images/observed_interpolated.png) |
