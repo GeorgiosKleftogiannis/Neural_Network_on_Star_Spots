@@ -10,10 +10,8 @@ Many physical mechanisms can cause a MA. One of them is the presence of spot/s, 
 3. Size
 4. Temperature ratio
 
-<p float="left">
-  <img src="images/model_eval.png" width="200" />
-  <img src="images/model_eval.png" width="200" />
-</p>
+| ![](images/model_eval.png) | ![](images/model_eval.png) |
+|----------------|----------------|
 
 The purpose of the present is to implement a neural network to search for a set of spot parameters values that could account for the MA observed in the EB system at hand. 
 
