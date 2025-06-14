@@ -1,5 +1,17 @@
 ## Overview
-This project implements a neural network to predict the values of star spot parameters of an eclipsing binary star.
+This project implements a neural network to predict the values of star spot parameters of an eclipsing binary star system (EB system).
+An EB system consists of two stars in a very small distance, orbiting around their common center of mass. The phenomenon is periodical and under certain circumstances the two star can eclipse one the other causing a decrease of light observed in time.
+Consequently the light curve of EB's can be devided in four different parts. Two parts that we observe the maximum light (both stars visible) and two parts that we observe minimum light (eclipses). 
+I general the two maximum of light observed in the curves should be equal. Whenever this is not the case, a maxima asymmetry (MA) is present.
+
+
+Many physical mechanisms can cause a MA. One of them is the presence of spot/s, which is an area on the star's surface that has different temperature (emmites different amount of light). There are four parameters that govern the spot.
+1. Longitude
+2. Latitude
+3. Size
+4. Temperature ratio
+
+The purpose of the present is to implement a neural network to search for a set of spot parameters values that could account for the MA observed in the EB system at hand. 
 
 ## Outline
 - [1-Packages](#1-packages)
@@ -40,6 +52,7 @@ from scipy.interpolate import Akima1DInterpolator
 ### 2.1 Synthetic data
 
 Since real data doesn't include ground truth for star spots parameters, I generated synthetic data using [PHOEBE](https://phoebe-project.org/)(PHysics Of Eclipsing BinariEs). I used Monte-Carlo sampling to generate 10,000 light curves for a specific eclipsing binary system, stadarized them to 201 equaly spaced phase points.
+All other physical parameters of the EB system were kept fixed in values that are known by other means.
 
 ### 2.2 Load Data
 Load light curve data (synthetic_lc.dat) and corresponding spot parameters (spot_par.dat).
