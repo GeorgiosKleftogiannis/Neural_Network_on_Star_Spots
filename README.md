@@ -179,11 +179,21 @@ This is further supported by the accuracy vs. epoch plot, where the training, va
 [^1]: The value of 0.75 accuracy may seem relatively low but given the complexity and the hight correlation between the physical parameters of the EB systems and star spot parameters is considered acceptable.
 
 ## 6. Predictions
-Finally, I apply the trained model to the observational light curve of the target system to infer the optimized star spot parameters.
+Finally, the trained model is applied to the observational light curve of the target eclipsing binary system to infer the corresponding star spot parameters. However, this step requires additional preprocessing, as the implementation is not entirely straightforward:
 
-The implementation is not entirely straightforward and requires some additional data processing. As mentioned earlier, each synthetic light curve consists of 201 equally spaced phase points. However, the observational data do not follow a fixed, evenly spaced grid. Therefore, I interpolate the observational light curve to match the same resolution before feeding it into the model. Further, the observational data are not in phase, so phase folding is implemented using the system's known period and epoch. Finally, I scaled the observational data before feed them to the model.
+1. Phase Folding:
+The observational data are not initially in phase. To correct this, phase folding is performed using the known orbital period and epoch of the system.
 
-The picture below shows the interpolation of the observed data to 201 equidistant phase points
+2. Interpolation:
+Each synthetic light curve in the training set consists of 201 equally spaced phase points. Since the observational data are irregularly sampled, they are interpolated to match the same 201-point grid for consistency with the training data.
+
+3. Normalization:
+The interpolated observational light curve is then normalized using the same Z-score method applied to the training features, ensuring compatibility with the model's expectations.
+
+Once these steps are complete, the processed light curve is passed through the neural network to predict the star spot parameters.
+
+The figure below shows the result of interpolating the observed data to 201 equally spaced phase points.
+
 ![Observed and interpolated data in phase](images/observed_interpolated.png)
 
 ## 7. Results evaluation
