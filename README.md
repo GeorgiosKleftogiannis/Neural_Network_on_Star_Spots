@@ -19,8 +19,8 @@
 ### 1.1 Maxima Asymmetry
 An EB system consists of two stars orbiting around their common center of mass at a close distance. The phenomenon is periodic, and if the observer's line of sight is closely aligned with the orbital plane of the system (i.e., they form a small angle), one star can eclipse the other, causing a measurable decrease in observed brightness over time. This creates a characteristic light curve, which can be divided into four distinct phases:
 
--Two maxima: when both stars are visible.
--Two minima: when one star eclipses the other.
+- Two maxima: when both stars are visible.
+- Two minima: when one star eclipses the other.
 
 In an ideal EB system, the two light maxima are equal. However, in some cases, an asymmetry between the maxima—known as Maxima Asymmetry (MA) or O' Connell effect—is observed. The image below illustrates this, comparing a light curve with MA (blue) and one without MA (yellow).
 
