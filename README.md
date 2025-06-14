@@ -166,18 +166,19 @@ Picture a shows the interpolation of observational data
 ![Observed and interpolated data in phase](images/observed_interpolated.png)
 
 ## 6. Results evaluation
-To evaluate the predictions made by the the NN for the four star spots parameters I update, in PHOEBE, the physical model of the system to include a star spot on the surface of star 1. This has two effects:
+To evaluate the predictions made by the the NN for the four star spots parameters I update, in PHOEBE, the physical model of the system to include a star spot on the surface of the . This has two effects:
 
-1. a small decrease of the χ^2 value,
+1. a small decrease of the χ**2 value,
 2. a the model still cannot represent correctly the first maximum of light.
 The first effect shows that the trained model not only can infere physeable results but it also increase the accuracy of the fitted model. While, the second one shows that there still room for improvment.
 
 ![spotted and unspotted observed and synthetic lightcurves](images/model_eval.png)
+As it can be seen in the above image the model with the spot (χ**2 = 1.490) is slightly better than the model without the spot (χ**2 = 1.557)
 
 ## 7. What's next
 To inprove my model I could do one of the following:
 1. Increase number of synthetic data to improve both training and validation accuracy.
 2. Increase the number of epochs and examine the effect that it has on the model.
 3. Create a more complete NN model to include synthetic and observation data for the other 3 filters.
-4. Try a different approch on the system's physical model by removing the star spot from star 1 and put it on star 2 of the system.
-5. Try different values for physical parameters of the system that are ambigues.
+4. Try a different approch on the system's physical model by removing the star spot from the hotter star and put it on colder star of the system.
+5. Try different values for physical parameters of the system that are ambiguous.
