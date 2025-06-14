@@ -89,11 +89,6 @@ x_t = synthetic_lc[:,2]
 x_t = x_t.reshape(n_sample, -1)
 ```
 ### 3.3 Preprocess Data
-Normalize each sample features values, using Z-score normalization (mean and standard deviation).
-Different scaling methods are used for target parameters:
-- For the first 3 parameters: Min-Max scaling
-- For the last parameter: Standard (Z-score) scaling
-
 Each sample's feature values (i.e., light curve fluxes) are normalized using Z-score normalization, where the mean and standard deviation are computed across the dataset. Different scaling strategies are applied to the target (spot) parameters:
 
 Min-Max scaling is used for the first three parameters:
@@ -101,6 +96,7 @@ Min-Max scaling is used for the first three parameters:
 - Longitude
 - Latitude
 - Size
+
 Z-score normalization is used for the fourth parameter:
 - Temperature Ratio
 
@@ -116,11 +112,12 @@ np.save('scale_par_2.npy', scale_par_2)
 ```
 
 ### 3.4 Split Data
-Split the dataset into:
-- Training set
-- Cross-validation set
-- Test set
-Using train_test_split
+The dataset is divided into three subsets using train_test_split from scikit-learn:
+- Training Set – Used to train the neural network.
+- Cross-Validation Set – Used for model tuning and to prevent overfitting.
+- Test Set – Used for final evaluation of model performance on unseen data.
+This structured split ensures robust model training and unbiased performance assessment.
+
 ```python
 x_train, x_, y_train, y_ = train_test_split(x_t, y_t, test_size=0.40, random_state=1)
 x_cv, x_test, y_cv, y_test = train_test_split(x_, y_, test_size=0.50, random_state=1)
@@ -128,8 +125,8 @@ x_cv, x_test, y_cv, y_test = train_test_split(x_, y_, test_size=0.50, random_sta
 
 ## 4. Define Neural Network Model
 A simple feedforward network with 4 hidden layers:
-- 3 ReLU hidden layers (256, 128 and 64 units)
-- 1 output layer with 4 units and a sigmoid activation
+- Three hidden layers (256, 128 and 64 units) – Fully connected layers with ReLU activation
+- Output layer (4 units) - sigmoid activation, representing the predicted spot parameters (scaled)
 
 | Layer (type) | Output Shape     | Activation | Parameters |
 |--------------|------------------|------------|------------|
@@ -148,11 +145,12 @@ model = Sequential([
     Dense(4, activation="sigmoid"),
 ])
 ```
-Compile with the Adam optimizer and mean squared error loss.
+The model is compiled using the Adam optimizer with a learning rate of 0.001, and mean squared error (MSE) as the loss function:
+
 ```python
 model.compile(optimizer=Adam(learning_rate=0.001), loss='mean_squared_error')
 ```
-Train the model using 500 epochs, with validation and test loss tracked:
+Train the model for 500 epochs while tracking validation and test loss:
 ```python
 history = model.fit(
    	x_train, y_train,
@@ -161,11 +159,12 @@ history = model.fit(
     callbacks=[test_loss_callback]
 )
 ```
-Define a custom Keras callback to evaluate the test loss at the end of each epoch:
+A custom Keras callback is used to evaluate the test loss at the end of each epoch:
 ```python
 class TestLossCallback(tf.keras.callbacks.Callback):
     ...
 ```
+
 ## 5. Model validation
 Visualize training, validation, and test loss:
 ```python
