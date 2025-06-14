@@ -190,27 +190,36 @@ Each synthetic light curve in the training set consists of 201 equally spaced ph
 3. Normalization:
 The interpolated observational light curve is then normalized using the same Z-score method applied to the training features, ensuring compatibility with the model's expectations.
 
-Once these steps are complete, the processed light curve is passed through the neural network to predict the star spot parameters.
-
-The figure below shows the result of interpolating the observed data to 201 equally spaced phase points.
+Once these steps are complete, the processed light curve is passed through the neural network to predict the star spot parameters. The figure below shows the result of interpolating the observed data to 201 equally spaced phase points.
 
 ![Observed and interpolated data in phase](images/observed_interpolated.png)
 
 ## 7. Results evaluation
-To evaluate the predictions made by the the NN for the four star spots parameters I update, in [PHOEBE](https://phoebe-project.org/releases/legacy/), the physical model of the system to include a star spot on the surface of the . This has two effects:
+To evaluate the predictions made by the the NN for the four star spots parameters I update the physical model of the system, using PHOEBE to include a star spot on the surface of the hotter star of the EB system. This update had two noticeable effects:
 
-1. a small decrease of the $χ^2$ value,
-2. a the model still cannot represent correctly the first maximum of light.
-The first effect shows that the trained model not only can infere physeable results but it also increase the accuracy of the fitted model. While, the second one shows that there still room for improvment.
+1. A slight decrease in the $χ^2$ of the model fit.,
+2. The model still fails to accurately reproduce the first light curve maximum.
+   
+The first result indicates that the trained model can infer physically plausible spot parameters and improve the fit to the observational data. However, the second result highlights that there is still room for improvement—particularly in reproducing finer details of the light curve asymmetry.
 
-As it can be seen in the above image the model with the spot ($χ^2 = 1.490$) is slightly better than the model without the spot ($χ^2 = 1.557$)
+As shown in the figure above, the model with the spot ($χ^2 = 1.490$) performs slightly better than the model without the spot ($χ^2 = 1.557$).
 
 ![spotted and unspotted observed and synthetic lightcurves](images/model_eval.png)
 
 ## 8. What's next
-To inprove my model I could do one of the following:
-1. Increase number of synthetic data to improve both training and validation accuracy.
-2. Increase the number of epochs and examine the effect that it has on the model.
-3. Create a more complete NN model to include synthetic and observation data for the other 3 filters (Johnson's V and Cousin's R and I).
-4. Try a different approch on the system's physical model by removing the star spot from the hotter star and put it on colder star of the system.
-5. Try different values for physical parameters of the system that are ambiguous.
+To further improve the model and its predictive performance, several enhancements could be explored:
+
+1. Increase the Size of the Synthetic Dataset
+Generating more synthetic light curves could help the model better generalize, improving both training and validation accuracy.
+
+2. Train for More Epochs
+Extending the number of training epochs may lead to better convergence. It would be useful to monitor how the model’s performance evolves and whether overfitting increases.
+
+3. Extend the Model to Multiple Photometric Filters
+Expand the neural network to incorporate synthetic and observational data from additional filters—specifically Johnson’s V and Cousins’ R and I. This would provide a more complete view of the system’s light emission and improve model robustness.
+
+4. Re-evaluate Spot Placement
+Currently, the star spot is placed on the hotter star. An alternative approach would be to place the spot on the cooler star, which might yield a better fit to the observed light curve asymmetry.
+
+5. Refine Uncertain Physical Parameters
+Explore the effect of adjusting system parameters that are not precisely known (e.g., system Temperature). Fine-tuning these values may improve the physical model and, consequently, the accuracy of the neural network's predictions.
