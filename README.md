@@ -4,12 +4,16 @@ An EB system consists of two stars in a very small distance, orbiting around the
 Consequently the light curve of EB's can be devided in four different parts. Two parts that we observe the maximum light (both stars visible) and two parts that we observe minimum light (eclipses). 
 I general the two maximum of light observed in the curves should be equal. Whenever this is not the case, a maxima asymmetry (MA) is present.
 
-
 Many physical mechanisms can cause a MA. One of them is the presence of spot/s, which is an area on the star's surface that has different temperature (emmites different amount of light). There are four parameters that govern the spot.
 1. Longitude
 2. Latitude
 3. Size
 4. Temperature ratio
+
+<p float="left">
+  <img src="images/model_eval.png" width="200" />
+  <img src="images/model_eval.png" width="200" />
+</p>
 
 The purpose of the present is to implement a neural network to search for a set of spot parameters values that could account for the MA observed in the EB system at hand. 
 
