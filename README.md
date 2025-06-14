@@ -10,7 +10,8 @@
 - [4-Define Neural Network Model](#4-define-neural-network-model)
 - [5-Model Validation](#5-model-validation)
 - [6-Predictions](#6-predictions)
-- [7-Results evaluation](7-results-evaluation)
+- [7-Results evaluation](#7-results-evaluation)
+- [8-What's next](#8-what's-next)
 
 ## 1. Overview
 This project implements a neural network to predict the values of star spot parameters of an eclipsing binary star system (EB system).
