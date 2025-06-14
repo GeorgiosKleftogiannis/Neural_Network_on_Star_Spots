@@ -14,9 +14,10 @@ Many physical mechanisms can cause a MA. One of them is the presence of spot/s, 
   <img src="images/observed_interpolated.png" alt="Alt text" />
   <figcaption>This is the caption.</figcaption>
 </figure>-->
+<!--| ![](images/observed_interpolated.png) | ![](images/observed_interpolated.png) |
+|----------------|----------------|-->
 
-| ![](images/observed_interpolated.png) | ![](images/observed_interpolated.png) |
-|----------------|----------------|
+![MA image](images/with_without_ma.png)
 
 The purpose of the present is to implement a neural network to search for a set of spot parameters values that could account for the MA observed in the EB system at hand. 
 
