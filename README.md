@@ -10,10 +10,10 @@ Many physical mechanisms can cause a MA. One of them is the presence of spot/s, 
 3. Size (degrees)
 4. Temperature ratio
 
-<figure>
+<!-- <figure>
   <img src="images/observed_interpolated.png" alt="Alt text" />
   <figcaption>This is the caption.</figcaption>
-</figure>
+</figure>-->
 
 | ![](images/observed_interpolated.png) | ![](images/observed_interpolated.png) |
 |----------------|----------------|
