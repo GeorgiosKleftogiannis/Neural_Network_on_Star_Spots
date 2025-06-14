@@ -1,3 +1,17 @@
+
+## Outline
+- [1-Overview](#1-overview)
+- [2-Packages](#2-packages)
+- [3-Load and Preprocess Data](#3-load-and-preprocess-data)
+  - [3.1 Synthetic data](#3.1-synthetic-data)
+  - [3.2 Load Data](#3.2-load-data)
+  - [3.3 Preprocess Data](#3.3-preprocess-data)
+  - [3.4 Split Data](#3.4-split-data)
+- [4-Define Neural Network Model](#4-define-neural-network-model)
+- [5-Model Validation](#5-model-validation)
+- [6-Predictions](#6-predictions)
+- [7-Results evaluation](7-results-evaluation)
+
 ## Overview
 This project implements a neural network to predict the values of star spot parameters of an eclipsing binary star system (EB system).
 An EB system consists of two stars in a very small distance, orbiting around their common center of mass. The phenomenon is periodical and under certain circumstances the two star can eclipse one the other causing a decrease of light observed in time.
@@ -20,18 +34,6 @@ Many physical mechanisms can cause a MA. One of them is the presence of spot/s, 
 |----------------|----------------|-->
 
 The purpose of the present is to implement a neural network (NN) to search for a set of spot parameters values that could account for the MA observed in the EB system at hand. The key idea is to train the NN with a set of synthetic data to learn the inverse problem. The model infered is used to compute the four star spot parameters from the shape of the light curve.
-
-## Outline
-- [1-Packages](#1-packages)
-- [2-Load and Preprocess Data](#2-load-and-preprocess-data)
-  - [2.1 Synthetic data](#2.1-synthetic-data)
-  - [2.2 Load Data](#2.2-load-data)
-  - [2.3 Preprocess Data](#2.3-preprocess-data)
-  - [2.4 Split Data](#2.4-split-data)
-- [3-Define Neural Network Model](#3-define-neural-network-model)
-- [4-Model Validation](#4-model-validation)
-- [5-Predictions](#5-predictions)
-- [6-Results evaluation](6-results-evaluation)
 
 
 ## 1. Packages
