@@ -161,14 +161,9 @@ The following image shows the loss and the accuracy of the NN model. It can be s
 ## 6. Predictions
 Finally, I apply the trained model to the observational light curve of the target system to infer the optimized star spot parameters.
 
-The implementation is not entirely straightforward and requires some additional data processing. As mentioned earlier, each synthetic light curve consists of 201 equally spaced phase points. However, the observational data do not follow a fixed, evenly spaced grid. Therefore, I interpolate the observational light curve to match the same resolution before feeding it into the model.
+The implementation is not entirely straightforward and requires some additional data processing. As mentioned earlier, each synthetic light curve consists of 201 equally spaced phase points. However, the observational data do not follow a fixed, evenly spaced grid. Therefore, I interpolate the observational light curve to match the same resolution before feeding it into the model. Further, the observational data are not in phase, so phase folding is implemented using the system's known period and epoch. Finally, I scaled the observational data before feed them to the model.
 
-Further, the observational data are not in phase, so phase folding is implemented using the system's known period and epoch.
-
-Finally, I scaled the observational data before feed them to the model.
-
-
-Picture a shows the interpolation of observational data
+The picture below shows the interpolation of the observed data to 201 equidistant phase points
 ![Observed and interpolated data in phase](images/observed_interpolated.png)
 
 ## 7. Results evaluation
