@@ -170,11 +170,10 @@ To evaluate the predictions made by the the NN for the four star spots parameter
 
 1. a small decrease of the $χ^2$ value,
 2. a the model still cannot represent correctly the first maximum of light.
-The first effect shows that the trained model not only can infere physeable results but it also increase the accuracy of the fitted model. While, the second one shows that there still room for improvment.
+The first effect shows that the trained model not only can infere physeable results but it also increase the accuracy of the fitted model. While, the second one shows that there still room for improvment. 
+As it can be seen in the above image the model with the spot ($χ^2 = 1.490$) is slightly better than the model without the spot ($χ^2 = 1.557$)
 
 ![spotted and unspotted observed and synthetic lightcurves](images/model_eval.png)
-
-As it can be seen in the above image the model with the spot ($χ^2 = 1.490$) is slightly better than the model without the spot ($χ^2 = 1.557$)
 
 ## 7. What's next
 To inprove my model I could do one of the following:
