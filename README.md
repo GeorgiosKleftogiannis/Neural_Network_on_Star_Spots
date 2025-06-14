@@ -176,7 +176,7 @@ The following image shows the loss and the accuracy of the NN during training. A
 This is further supported by the accuracy vs. epoch plot, where the training, validation, and test accuracies converge around 0.750, indicating consistent performance across all three datasets. (0.75[^1]).
 ![Training, validation and test loss and accuracy](images/loss_accuracy.png)
 
-[^1]: The value of 0.75 accuracy may seem relatively low but given the complexity and the hight correlation between the physical parameters of the EB systems and star spot parameters is considered acceptable.
+[^1]: While an accuracy of 0.75 may seem relatively modest, it is considered acceptable given the complexity of the problem and the high degree of correlation between the physical parameters of the eclipsing binary system and the star spot characteristics.
 
 ## 6. Predictions
 Finally, the trained model is applied to the observational light curve of the target eclipsing binary system to infer the corresponding star spot parameters. However, this step requires additional preprocessing, as the implementation is not entirely straightforward:
