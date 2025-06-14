@@ -153,7 +153,10 @@ plt.plot(history.history['loss'], label='Training Loss')
 plt.plot(history.history['val_loss'], label='Validation Loss')
 plt.plot(test_losses, label='Test Loss')
 ```
+The following image shows the loss and the accuracy of the NN model. It can be seen that although the model is slightly overfiting (validation loss>training loss) the test loss is at thte same amount the training loss which means that the model generalizes well. This is supported by the accuracy vs epoch diagramm which shows that training, validation and test accuracy have aproximatly the same value (0.75[^1]).
 ![Training, validation and test loss and accuracy](images/loss_accuracy.png)
+
+[^1]: This is the footnote text 
 
 ## 6. Predictions
 Finally, I apply the trained model to the observational light curve of the target system to infer the optimized star spot parameters.
