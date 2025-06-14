@@ -69,9 +69,9 @@ from scipy.interpolate import Akima1DInterpolator
 
 ## 3. Load and Preprocess Data
 ### 3.1 Synthetic data
+Since real observational data does not include ground truth for star spot parameters, I generated synthetic data using [PHOEBE](https://phoebe-project.org/) (PHysics Of Eclipsing BinariEs). I employed Monte Carlo sampling to create 10,000 synthetic light curves for a specific eclipsing binary system. Each light curve was standardized to 201 equally spaced phase points.
 
-Since real data doesn't include ground truth for star spots parameters, I generated synthetic data using [PHOEBE](https://phoebe-project.org/)(PHysics Of Eclipsing BinariEs). I used Monte-Carlo sampling to generate 10,000 light curves for a specific eclipsing binary system, stadarized them to 201 equaly spaced phase points.
-All other physical parameters of the EB system were kept fixed in values that are known by other means. For simplicity the synthetic light curves represent data observed in the filter Johnson's B from the photometric UBV system.
+All other physical parameters of the EB system were held constant at values known from independent studies. For simplicity, the synthetic light curves were simulated in the Johnson B filter of the photometric UBV system.
 
 ### 3.2 Load Data
 Load light curve data (synthetic_lc.dat) and corresponding spot parameters (spot_par.dat).
@@ -93,6 +93,18 @@ Normalize each sample features values, using Z-score normalization (mean and sta
 Different scaling methods are used for target parameters:
 - For the first 3 parameters: Min-Max scaling
 - For the last parameter: Standard (Z-score) scaling
+
+Each sample's feature values (i.e., light curve fluxes) are normalized using Z-score normalization, where the mean and standard deviation are computed across the dataset. Different scaling strategies are applied to the target (spot) parameters:
+
+Min-Max scaling is used for the first three parameters:
+
+- Longitude
+- Latitude
+- Size
+Z-score normalization is used for the fourth parameter:
+- Temperature Ratio
+
+This approach ensures that both input and target data are well-conditioned for neural network training.
 ```python
 scale_par_1 = [] # mean or max
 scale_par_2 = [] # std or min
